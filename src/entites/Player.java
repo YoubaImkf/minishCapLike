@@ -12,17 +12,26 @@ import java.util.Objects;
 public class Player extends Entity {
     private final GamePanel gamePanel;
     private final KeyHandler keyHandler;
+    public final int screenX;
+    public final int screenY;
 
     public Player(GamePanel gamePanel, KeyHandler keyHandler) {
         this.gamePanel = gamePanel;
         this.keyHandler = keyHandler;
+        this.screenX = gamePanel.screenWidth/2 - (gamePanel.tileSize / 2);  // the player screen ( is to center the player  )
+        this.screenY = gamePanel.screenHeight/2 - (gamePanel.tileSize / 2); // does not change   ( because we take top left of image )
+        solidArea = new Rectangle(8, 16, 32, 32);
+//        solidArea.x = 9;
+//        solidArea.y = 16;
+//        solidArea.width = 32;
+//        solidArea.height = 32;
         setDefaultValue();
         getPlayerImg();
     }
 
     public void setDefaultValue(){
-        x = 100;   // default playerX position
-        y = 100;   // default playerY position
+        worldX = gamePanel.tileSize * 23;   // default playerX position
+        worldY= gamePanel.tileSize * 21;   // default playerY position
         speed = 3; // px player will move
         direction =  "down"; // default player image direction
     }
@@ -30,14 +39,14 @@ public class Player extends Entity {
     public void getPlayerImg(){
 
         try {
-            up1    = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Player/link-up-not.png")));
-            up2    = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Player/link-up-moving.png")));
-            down1  = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Player/link-down-not.png")));
-            down2  = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Player/link-down-moving.png")));
-            right1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Player/link-right-not.png")));
-            right2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Player/link-right-moving.png")));
-            left1  = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Player/link-left-not.png")));
-            left2  = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Player/link-left-moving.png")));
+            up1    = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/link-up-not.png")));
+            up2    = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/link-up-moving.png")));
+            down1  = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/link-down-not.png")));
+            down2  = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/link-down-moving.png")));
+            right1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/link-right-not.png")));
+            right2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/link-right-moving.png")));
+            left1  = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/link-left-not.png")));
+            left2  = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/link-left-moving.png")));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -48,20 +57,24 @@ public class Player extends Entity {
 
             if (keyHandler.up) {
                 direction = "up";
-                y -= speed;
+                worldY -= speed;
             }
             if (keyHandler.down) {
                 direction = "down";
-                y += speed;
+                worldY += speed;
             }
             if (keyHandler.left) {
                 direction = "left";
-                x -= speed;
+                worldX -= speed;
             }
             if (keyHandler.right) {
                 direction = "right";
-                x += speed;
+                worldX += speed;
             }
+
+            collisonOn = false;
+            gamePanel.collisionChecker.ckeckTile(this); // entity is the player that implement Entity
+
             spriteCounter++;
             if (spriteCounter > 10) { // regulate moving speed
                 if (spriteNum == 1) {
@@ -112,6 +125,7 @@ public class Player extends Entity {
                 }
             }
         }
-        graphics2D.drawImage(img, x, y, gamePanel.tileSize, gamePanel.tileSize, null);
+        graphics2D.drawImage(img, screenX, screenY, gamePanel.tileSize, gamePanel.tileSize, null); // draw player image
+
     }
 }

@@ -1,6 +1,6 @@
 package main;
 
-import Tile.TileManager;
+import tile.TileManager;
 import entites.Player;
 import javax.swing.*;
 import java.awt.*;
@@ -9,17 +9,23 @@ public class GamePanel extends JPanel implements Runnable{
     // SCREEN SETTINGS
     final int originalSize = 16; // 16 X 16 tile
     final int scale = 3;
-
     public final int tileSize = originalSize * scale; // 48 X 48
     public final int maxScreenCol = 15; // 16
     public final int maxScreenRow = 10; // 12
     public final int screenWidth = tileSize * maxScreenCol;  // 720px
     public final int screenHeight = tileSize * maxScreenRow; // 480px
-    KeyHandler keyHandler =  new KeyHandler(); // Object that store key press
+    public KeyHandler keyHandler =  new KeyHandler(); // Object that store key press
     private Thread gameThread ; // Object Thread
-    Player player = new Player(this, keyHandler); // Object Player
-    TileManager tileManager = new TileManager(this); // Object
+    public Player player = new Player(this, keyHandler); // Object Player
+    public TileManager tileManager = new TileManager(this); // Object
 
+    public CollisionChecker collisionChecker = new CollisionChecker(this);
+
+    //=========World SETTINGS===========
+    public final int maxWorldCol = 50;
+    public final int maxWorldRow = 50;
+    public final int wolrdWidth = tileSize * maxWorldCol;
+    public final int wolrdHeight = tileSize* maxWorldRow;
 
     public GamePanel() {
 
