@@ -8,24 +8,79 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class TileManager {
 
     private final GamePanel gamePanel;
-    private final Tile[] tile;
-    int[][] mapTileNum; // map's data stored in
+    public  Tile[] tile;
+    public int[][] mapTileNum; // map's data stored in
+    public ArrayList<String> fileNames = new ArrayList<>();
+    public ArrayList<String> collisionStatus = new ArrayList<>();
     public TileManager(GamePanel gamePanel) {
-        this.gamePanel = gamePanel;
-        this.tile = new Tile[10]; // number of tile
-        mapTileNum = new int[gamePanel.maxWorldCol][gamePanel.maxWorldRow]; // create map that store number in txt map file
-        getTileImage();
-        loadMap("/maps/world01.txt");
-    }
 
-    public void getTileImage(){
+        this.gamePanel = gamePanel;
+
+        // Read Data map file
+        InputStream inputStream = getClass().getResourceAsStream("/maps/link-house-data.txt");
+        assert inputStream != null;
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+
+        //Read info name and collision
+        String line;
+        try {
+            while ((line = bufferedReader.readLine()) != null) { // if line not null add
+                fileNames.add(line);
+                collisionStatus.add(bufferedReader.readLine());
+            }
+            bufferedReader.close();
+
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+
+        // Initialize the tile array #Name
+        this.tile = new Tile[fileNames.size()]; // number of tile
+        getTileImages();
+
+        // Get maw size map
+        inputStream = getClass().getResourceAsStream("/maps/link-house.txt");
+        assert inputStream != null;
+        bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 
         try{
+            String line2 = bufferedReader.readLine();
+            String[] maxTile = line2.split(" ");
+
+            gamePanel.maxWorldCol = maxTile.length; // map size 100x100
+            gamePanel.maxWorldRow = maxTile.length; // map size 100x100
+            mapTileNum = new int[gamePanel.maxWorldCol][gamePanel.maxWorldRow]; // create map that store number in txt map file
+            bufferedReader.close();
+
+        }catch (IOException e){
+            System.out.println("Exception ! ");;
+        }
+        loadMap("/maps/link-house.txt");
+
+        /*loadMap("/maps/world01.txt");*/
+    }
+
+    public void getTileImages() {
+
+        for (int i = 0; i < fileNames.size(); i++) {
+            String fileName;
+            boolean collision;
+
+            // Get file name
+            fileName = fileNames.get(i);
+            // Get collisions
+            collision = collisionStatus.get(i).equals("true");
+            setupImages(i, fileName, collision);
+        }
+
+
+ /*       try{
             tile[4] = new Tile();
             tile[4].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/south-hyrule-plant.png")));
             tile[4].collision = true;
@@ -39,20 +94,29 @@ public class TileManager {
 
             tile[3] = new Tile();
             tile[3].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/wall-grass.png")));
-            tile[4].collision = true;
+            tile[3].collision = true;
 
             tile[1] = new Tile();
             tile[1].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/wall.png")));
-            tile[4].collision = true;
+            tile[1].collision = true;
 
             tile[0] = new Tile();
             tile[0].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/grass.png")));
+*/
+    }
 
+    public void setupImages(int index, String imageName, boolean collision){
 
-        }catch(IOException e){
+        try {
+            tile[index] = new Tile();
+            tile[index].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/house-split/" + imageName)));
+//            tile[index].image = uTool.scaleImage(tile[index].image, gamePanel.tileSize, gamePanel.tileSize);
+            tile[index].collision = collision;
+        }catch (IOException e){
             e.printStackTrace();
         }
     }
+
 
     public void loadMap(String mapFilePath){
         try{
@@ -102,9 +166,9 @@ public class TileManager {
             int screenY = worldY - gamePanel.player.worldY + gamePanel.player.screenY;
 
             // Condition to load image tiles based on player ratio screen (10 cuz of some bugs black bar)
-            if(worldX + gamePanel.tileSize + 10 > gamePanel.player.worldX - gamePanel.player.screenX &&
+            if(worldX + gamePanel.tileSize  > gamePanel.player.worldX - gamePanel.player.screenX &&
                     worldX - gamePanel.tileSize < gamePanel.player.worldX + gamePanel.player.screenX &&
-                    worldY + gamePanel.tileSize + 10 > gamePanel.player.worldY - gamePanel.player.screenY &&
+                    worldY + gamePanel.tileSize  > gamePanel.player.worldY - gamePanel.player.screenY &&
                     worldY - gamePanel.tileSize < gamePanel.player.worldY + gamePanel.player.screenY) {
 
                 graphics2D.drawImage(tile[tilesNum].image, screenX, screenY, gamePanel.tileSize, gamePanel.tileSize, null);

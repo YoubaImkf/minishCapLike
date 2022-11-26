@@ -1,5 +1,6 @@
 package main;
 
+import object.MyObject;
 import tile.TileManager;
 import entites.Player;
 import javax.swing.*;
@@ -17,15 +18,16 @@ public class GamePanel extends JPanel implements Runnable{
     public KeyHandler keyHandler =  new KeyHandler(); // Object that store key press
     private Thread gameThread ; // Object Thread
     public Player player = new Player(this, keyHandler); // Object Player
-    public TileManager tileManager = new TileManager(this); // Object
-
+    public TileManager tileManager = new TileManager(this); // Object Tile manager
     public CollisionChecker collisionChecker = new CollisionChecker(this);
+    public MyObject[] obj = new MyObject[10]; // Object that store Objects at the same time
+    public AssertHandler assertHandler = new AssertHandler(this);
 
     //=========World SETTINGS===========
-    public final int maxWorldCol = 50;
-    public final int maxWorldRow = 50;
-    public final int wolrdWidth = tileSize * maxWorldCol;
-    public final int wolrdHeight = tileSize* maxWorldRow;
+    public int maxWorldCol;
+    public int maxWorldRow;
+    public final int worldWidth = tileSize * maxWorldCol;
+    public final int worldHeight = tileSize* maxWorldRow;
 
     public GamePanel() {
 
@@ -36,6 +38,9 @@ public class GamePanel extends JPanel implements Runnable{
         this.setFocusable(true);
     }
 
+    public void setupItemsGame(){
+        assertHandler.setObject();
+    }
     public void StartGameThread() {
 
         gameThread = new Thread(this);
@@ -72,8 +77,20 @@ public class GamePanel extends JPanel implements Runnable{
 
         super.paintComponent(g); // super = parent
         Graphics2D graphics2D = (Graphics2D)g; // sophisticated control over geometry, coordinate transformations, color management, and text layou
-        tileManager.drawTiles(graphics2D );
-        this.player.draw(graphics2D);
+        this.tileManager.drawTiles(graphics2D );
+
+        for (MyObject myObject : obj) {
+            if (myObject != null) {
+                myObject.drawObject((Graphics2D) g, this);
+            }
+        }
+
+        this.player.drawPlayer(graphics2D);
         graphics2D.dispose();
     }
+
+
+
+
+
 }
