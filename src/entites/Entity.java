@@ -15,5 +15,8 @@ public class Entity {
     public int spriteNum = 1;
 
     public Rectangle solidArea; // Object that will represent the collision area of our player
+//    public int solidAreaDefaultX;
+//    public int solidAreaDefaultY;
+
     public boolean collisonOn = false;
 }

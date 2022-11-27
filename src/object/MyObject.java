@@ -9,7 +9,7 @@ public class MyObject {
 
     public BufferedImage image;
     public String name;
-    public boolean collision = false;
+//    public boolean collision = false;
     public int worldX, worldY;
 
     public void drawObject(Graphics2D graphics2D, GamePanel gamePanel){

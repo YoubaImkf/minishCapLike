@@ -72,18 +72,10 @@ public class Player extends Entity {
             if (collisonOn) {
 
                 switch (direction) {
-                    case "up" -> {
-                        worldY -= speed;
-                    }
-                    case "down" -> {
-                        worldY += speed;
-                    }
-                    case "left" -> {
-                        worldX -= speed;
-                    }
-                    case "right" -> {
-                        worldX += speed;
-                    }
+                    case "up" -> worldY -= speed;
+                    case "down" -> worldY += speed;
+                    case "left" -> worldX -= speed;
+                    case "right" -> worldX += speed;
                 }
                 spriteCounter++;
                 if (spriteCounter > 10) { // regulate moving speed

@@ -2,11 +2,11 @@ package main;
 
 import object.OBJ_Key;
 
-public class AssertHandler {
+public class ItemHandler {
 
     GamePanel gamePanel;
 
-    public AssertHandler(GamePanel gamePanel) {
+    public ItemHandler(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
     }
 
