@@ -14,4 +14,4 @@ git clone https://github.com/YoubaImkf/IRpg
 ```
 
 
-Thanks a lot to RyiSnow for is [How to Make a 2D Game in Java.](httpswww.youtube.complaylistlist=PL_QPQmz5C6WUF-pOQDsbsKbaBZqXj4qSq)
+Thanks a lot to RyiSnow for his [How to Make a 2D Game in Java.](httpswww.youtube.complaylistlist=PL_QPQmz5C6WUF-pOQDsbsKbaBZqXj4qSq)
