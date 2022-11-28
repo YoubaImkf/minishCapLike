@@ -15,7 +15,7 @@ public class Main {
         GamePanel gamePanel = new GamePanel();
         window.add(gamePanel);
         window.pack();
-        window.setLocationRelativeTo(null);
+        window.setLocationRelativeTo(null); // center the window
         window.setVisible(true);
 
         gamePanel.setupGame();

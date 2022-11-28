@@ -27,7 +27,7 @@ public class Player extends Entity {
 
     public void setDefaultValue(){
         worldX = gamePanel.tileSize * 23;   // default playerX position
-        worldY= gamePanel.tileSize * 32;   // default playerY position
+        worldY= gamePanel.tileSize * 25;   // default playerY position
         speed = 3; // px player will move
         direction =  "down"; // default player image direction
     }

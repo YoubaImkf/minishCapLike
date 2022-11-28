@@ -6,7 +6,7 @@ import entites.Player;
 import javax.swing.*;
 import java.awt.*;
 
-public class GamePanel extends JPanel implements Runnable{
+    public class GamePanel extends JPanel implements Runnable{
     // SCREEN SETTINGS
     final int originalSize = 16; // 16 X 16 tile
     final int scale = 3;
@@ -24,7 +24,6 @@ public class GamePanel extends JPanel implements Runnable{
     public CollisionChecker collisionChecker = new CollisionChecker(this);
     public MyObject[] obj = new MyObject[10]; // Object that store Objects at the same time
     public ItemHandler itemHandler = new ItemHandler(this);
-
     public UI ui = new UI(this);
 
     // World SETTINGS
@@ -119,7 +118,6 @@ public class GamePanel extends JPanel implements Runnable{
             //UI
             this.ui.drawUI(graphics2D); // draw text
         }
-
 
 
         graphics2D.dispose();
