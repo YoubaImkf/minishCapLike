@@ -10,7 +10,7 @@ Thinking about changing programming languages like "lua"...
 ## Installation
 Clone this repo ↓
 ```bash
-git clone https://github.com/YoubaImkf/IRpg
+git clone https://github.com/YoubaImkf/minishCapLike
 ```
 
 
