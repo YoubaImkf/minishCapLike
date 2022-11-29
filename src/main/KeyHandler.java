@@ -22,9 +22,14 @@ public class KeyHandler implements KeyListener{
         int keyCode = e.getKeyCode();
 
         //title state
+
         if(gamePanel.gameState == gamePanel.titleState){ // Press Enter to Start the game
+
             if (keyCode == KeyEvent.VK_ENTER){
-               gamePanel.gameState = gamePanel.playState;
+                gamePanel.stopMusic(); // stop precedent music
+                gamePanel.gameState = gamePanel.playState;
+                gamePanel.playMusic(1, -20.0f);
+
             }
             if (keyCode == KeyEvent.VK_ESCAPE){ System.exit(0); } // Quit
         }
@@ -47,9 +52,13 @@ public class KeyHandler implements KeyListener{
         if (keyCode == KeyEvent.VK_ESCAPE){
             if(gamePanel.gameState == gamePanel.playState){
                 gamePanel.gameState = gamePanel.pauseState;
+                gamePanel.stopMusic();
+                gamePanel.playMusic(2, -20f);
 
             } else if (gamePanel.gameState == gamePanel.pauseState) {
                 gamePanel.gameState = gamePanel.playState;
+                gamePanel.stopMusic();
+                gamePanel.playMusic(1, -20f);
             }
         }
     }

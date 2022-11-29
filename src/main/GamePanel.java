@@ -3,6 +3,8 @@ package main;
 import object.MyObject;
 import tile.TileManager;
 import entites.Player;
+
+import javax.sound.sampled.FloatControl;
 import javax.swing.*;
 import java.awt.*;
 
@@ -25,12 +27,10 @@ import java.awt.*;
     public MyObject[] obj = new MyObject[10]; // Object that store Objects at the same time
     public ItemHandler itemHandler = new ItemHandler(this);
     public UI ui = new UI(this);
-
+    public Sound sound = new Sound();
     // World SETTINGS
     public int maxWorldCol;
     public int maxWorldRow;
-    public final int worldWidth = tileSize * maxWorldCol;
-    public final int worldHeight = tileSize* maxWorldRow;
 
     // Game States
     public int gameState;
@@ -51,6 +51,7 @@ import java.awt.*;
 
         itemHandler.setObject();
         this.gameState = titleState;
+        playMusic(0, -20.0f);
     }
     public void StartGameThread() {
 
@@ -124,7 +125,22 @@ import java.awt.*;
     }
 
 
+    public void playMusic(int i, float f){
+        sound.setFile(i);
+        FloatControl gainControl =
+                (FloatControl) sound.clip.getControl(FloatControl.Type.MASTER_GAIN);
+        gainControl.setValue(f); // Reduce volume by 10 decibels
+        sound.play();
+        sound.loop();
+    }
+    public void playSoundEffect(int i){
+        sound.setFile(i);
+        sound.play();
+    }
 
+    public void stopMusic(){
+        sound.stop();
+    }
 
 
 }
