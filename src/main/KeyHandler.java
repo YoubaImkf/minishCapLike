@@ -7,7 +7,7 @@ public class KeyHandler implements KeyListener{
 
     public boolean up, down, right, left;
     private final GamePanel gamePanel;
-
+    boolean checkDrawTime = false;
     public KeyHandler(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
     }
@@ -59,6 +59,14 @@ public class KeyHandler implements KeyListener{
                 gamePanel.gameState = gamePanel.playState;
                 gamePanel.stopMusic();
                 gamePanel.playMusic(1, -20f);
+            }
+        }
+
+        if (keyCode == KeyEvent.VK_T){
+            if(checkDrawTime == false){
+                checkDrawTime = true;
+            }else if( checkDrawTime == true){
+                checkDrawTime = false;
             }
         }
     }

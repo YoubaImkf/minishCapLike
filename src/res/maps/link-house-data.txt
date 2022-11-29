@@ -55,7 +55,7 @@ true
 testing_116.png
 true
 testing_117.png
-false
+true
 testing_118.png
 true
 testing_119.png
@@ -175,7 +175,7 @@ true
 testing_170.png
 true
 testing_171.png
-false
+true
 testing_172.png
 true
 testing_173.png
@@ -263,7 +263,7 @@ true
 testing_210.png
 true
 testing_211.png
-false
+true
 testing_212.png
 true
 testing_213.png
@@ -301,9 +301,9 @@ false
 testing_26.png
 false
 testing_27.png
-false
+true
 testing_28.png
-false
+true
 testing_29.png
 false
 testing_30.png
@@ -355,7 +355,7 @@ true
 testing_53.png
 true
 testing_54.png
-false
+true
 testing_55.png
 false
 testing_56.png
@@ -365,7 +365,7 @@ false
 testing_58.png
 false
 testing_59.png
-false
+true
 testing_60.png
 true
 testing_61.png

@@ -94,11 +94,11 @@ import java.awt.*;
 
         super.paintComponent(g); // super = parent
         Graphics2D graphics2D = (Graphics2D)g; // sophisticated control over geometry, coordinate transformations, color management, and text layou
-//        //Debug
-//        long drawStart = 0;
-//        if(keyHandler.checkDrawTime == true){
-//            drawStart = System.nanoTime();
-//        }
+        //Debug
+        long drawStart = 0;
+        if(keyHandler.checkDrawTime) {
+            drawStart = System.nanoTime();
+        }
 
         // title Screen
         if(gameState == titleState){
@@ -120,8 +120,14 @@ import java.awt.*;
             this.ui.drawUI(graphics2D); // draw text
         }
 
-
+        if(keyHandler.checkDrawTime) {
+        long drawEnd =  System.nanoTime();
+        long passed = drawEnd - drawStart;
+        graphics2D.drawString("draw time" + passed, 10, 400);
+        System.out.println("draw time" + passed);
         graphics2D.dispose();
+        }
+
     }
 
 
