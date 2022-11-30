@@ -2,10 +2,12 @@ package entites;
 
 import main.GamePanel;
 import main.KeyHandler;
+import main.UtilityTool;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -30,23 +32,38 @@ public class Player extends Entity {
         worldY= gamePanel.tileSize * 25;   // default playerY position
         speed = 3; // px player will move
         direction =  "down"; // default player image direction
+
+        ///Status player
+        maxHp = 6; // 2life = 1heart
+        hp = maxHp;
     }
 
     public void getPlayerImg(){
 
-        try {
-            up1    = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/link-up-not.png")));
-            up2    = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/link-up-moving.png")));
-            down1  = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/link-down-not.png")));
-            down2  = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/link-down-moving.png")));
-            right1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/link-right-not.png")));
-            right2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/link-right-moving.png")));
-            left1  = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/link-left-not.png")));
-            left2  = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/link-left-moving.png")));
-        } catch (IOException e) {
+        up1    = setupPlayerImg("link-up-not");
+        up2    = setupPlayerImg("link-up-moving");
+        down1  = setupPlayerImg("link-down-not");
+        down2  = setupPlayerImg("link-down-moving");
+        right1 = setupPlayerImg("link-right-not");
+        right2 = setupPlayerImg("link-right-moving");
+        left1  = setupPlayerImg("link-left-not");
+        left2  = setupPlayerImg("link-left-moving");
+
+    }
+
+    public BufferedImage setupPlayerImg(String imgName){
+        UtilityTool utilityTool = new UtilityTool();
+        BufferedImage img = null;
+
+        try{
+            img = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/" + imgName + ".png")));
+            img = utilityTool.scaleImage(img, gamePanel.tileSize, gamePanel.tileSize );
+        }catch(IOException e){
             e.printStackTrace();
         }
+        return img;
     }
+
     public void Update() { // called 60 time by sec
         // if key pressed then moving
         if (keyHandler.up || keyHandler.down || keyHandler.right || keyHandler.left) {
@@ -128,7 +145,7 @@ public class Player extends Entity {
                 }
             }
         }
-        graphics2D.drawImage(img, screenX, screenY, gamePanel.tileSize, gamePanel.tileSize, null); // draw player image
+        graphics2D.drawImage(img, screenX, screenY,null); // draw player image
 
     }
 }

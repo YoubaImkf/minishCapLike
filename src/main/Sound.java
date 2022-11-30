@@ -10,9 +10,11 @@ public class Sound {
     URL[] soundUrl = new URL[30];
 
     public Sound() {
-        soundUrl[0] = getClass().getResource("/sound/01-Title-Screen.wav");
-        soundUrl[1] = getClass().getResource("/sound/11-Hyrule-Field.wav");
-        soundUrl[2] = getClass().getResource("/sound/02-File-Select.wav");
+        soundUrl[0] = getClass().getResource("/sounds/01-Title-Screen.wav");
+        soundUrl[1] = getClass().getResource("/sounds/11-Hyrule-Field.wav");
+        soundUrl[2] = getClass().getResource("/sounds/02-File-Select.wav");
+        soundUrl[3] = getClass().getResource("/sounds/effects/MC_Menu_Select.wav");
+
     }
 
     public void setFile(int i){

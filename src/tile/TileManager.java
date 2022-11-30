@@ -18,6 +18,7 @@ public class TileManager {
     public int[][] mapTileNum; // map's data stored in
     public ArrayList<String> fileNames = new ArrayList<>();
     public ArrayList<String> collisionStatus = new ArrayList<>();
+
     public TileManager(GamePanel gamePanel) {
 
         this.gamePanel = gamePanel;
@@ -80,28 +81,10 @@ public class TileManager {
         }
 
 
- /*       try{
+ /*      before ...
             tile[4] = new Tile();
             tile[4].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/south-hyrule-plant.png")));
             tile[4].collision = true;
-
-            tile[5] = new Tile();
-            tile[5].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/south-hyrule-grass-way.png")));
-
-            tile[2] = new Tile();
-            tile[2].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/water.png")));
-            tile[2].collision = true;
-
-            tile[3] = new Tile();
-            tile[3].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/wall-grass.png")));
-            tile[3].collision = true;
-
-            tile[1] = new Tile();
-            tile[1].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/wall.png")));
-            tile[1].collision = true;
-
-            tile[0] = new Tile();
-            tile[0].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/grass.png")));
 */
     }
 

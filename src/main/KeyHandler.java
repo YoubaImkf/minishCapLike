@@ -27,7 +27,17 @@ public class KeyHandler implements KeyListener{
 
             if (keyCode == KeyEvent.VK_ENTER){
                 gamePanel.stopMusic(); // stop precedent music
+
+                gamePanel.playSoundEffect(3, -20.0f);
+
                 gamePanel.gameState = gamePanel.playState;
+
+                // wait sound effect I guess not the best way for sure ...
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException ex) {
+                    throw new RuntimeException(ex);
+                }
                 gamePanel.playMusic(1, -20.0f);
 
             }

@@ -51,7 +51,7 @@ import java.awt.*;
 
         itemHandler.setObject();
         this.gameState = titleState;
-        playMusic(0, -20.0f);
+        playSoundEffect(0, -20.0f);
     }
     public void StartGameThread() {
 
@@ -139,8 +139,11 @@ import java.awt.*;
         sound.play();
         sound.loop();
     }
-    public void playSoundEffect(int i){
+    public void playSoundEffect(int i, float f){
         sound.setFile(i);
+        FloatControl gainControl =
+                (FloatControl) sound.clip.getControl(FloatControl.Type.MASTER_GAIN);
+        gainControl.setValue(f); // Reduce volume by 10 decibels
         sound.play();
     }
 

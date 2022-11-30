@@ -19,4 +19,9 @@ public class Entity {
 //    public int solidAreaDefaultY;
 
     public boolean collisonOn = false;
+
+    // Character status
+    public int maxHp;
+    public int hp;
+
 }

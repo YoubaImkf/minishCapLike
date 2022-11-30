@@ -1,17 +1,18 @@
 package object;
 
 import main.GamePanel;
+import main.UtilityTool;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class MyObject {
 
-    public BufferedImage image;
+    public BufferedImage image1, image2, image3;
     public String name;
 //    public boolean collision = false;
     public int worldX, worldY;
-
+    UtilityTool utilityTool = new UtilityTool();
     public void drawObject(Graphics2D graphics2D, GamePanel gamePanel){
 
         int screenX = worldX - gamePanel.player.worldX + gamePanel.player.screenX;
@@ -23,7 +24,7 @@ public class MyObject {
                 worldY + gamePanel.tileSize  > gamePanel.player.worldY - gamePanel.player.screenY &&
                 worldY - gamePanel.tileSize < gamePanel.player.worldY + gamePanel.player.screenY) {
 
-            graphics2D.drawImage(image, screenX, screenY, gamePanel.tileSize, gamePanel.tileSize, null);
+            graphics2D.drawImage(image1, screenX, screenY, gamePanel.tileSize, gamePanel.tileSize, null);
         }
 
     }

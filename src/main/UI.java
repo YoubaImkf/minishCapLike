@@ -1,5 +1,8 @@
 package main;
 
+import object.MyObject;
+import object.OBJ_Heart;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -21,11 +24,19 @@ public class UI implements ActionListener {
     public int messageCounter = 0;
     public boolean gameFinished =  false;
     public int commandNum = 0;
+
+    BufferedImage fullHeart, halfHeart, emptyHeart;
     Font arial_40;
     public UI(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
         //font ..
         arial_40 = new Font("Arial", Font.PLAIN, 40);
+
+        //HUD objects
+        MyObject heart = new OBJ_Heart(gamePanel);
+        fullHeart = heart.image1;
+        halfHeart = heart.image2;
+        emptyHeart = heart.image3;
     }
 
     public void showMessage(String text){
@@ -44,10 +55,41 @@ public class UI implements ActionListener {
             drawTitleScreen();
         }
         else if(gamePanel.gameState == gamePanel.playState){
-            //
+            drawPlayerHp();
         }
         else if(gamePanel.gameState == gamePanel.pauseState){
+            
             drawPauseScreen();
+        }
+    }
+
+    private void drawPlayerHp() {
+        
+        int x = gamePanel.tileSize/2 - gamePanel.tileSize/5;
+        int y = gamePanel.tileSize/2;
+        int i = 0;
+        // DRAW HP
+        while(i < gamePanel.player.maxHp / 2){
+            graphics2D.drawImage(emptyHeart, x, y, null);
+            i++;
+            x+=gamePanel.tileSize - (gamePanel.tileSize / 3) -  2; // distance between hearts
+        }
+
+        // reset
+        x = gamePanel.tileSize/2 - gamePanel.tileSize/5;
+        y = gamePanel.tileSize/2;
+        i = 0;
+
+        // draw current heart
+        while(i < gamePanel.player.hp){
+            graphics2D.drawImage(halfHeart, x, y, null);
+            i++;
+            if(i < gamePanel.player.hp){
+                graphics2D.drawImage(fullHeart, x, y, null);
+            }
+            i++;
+            x+=gamePanel.tileSize - (gamePanel.tileSize / 3) - 2;
+
         }
     }
 
