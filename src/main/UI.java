@@ -64,7 +64,7 @@ public class UI implements ActionListener {
     }
 
     private void drawPlayerHp() {
-        
+
         int x = gamePanel.tileSize/2 - gamePanel.tileSize/5;
         int y = gamePanel.tileSize/2;
         int i = 0;
