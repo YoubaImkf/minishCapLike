@@ -17,4 +17,6 @@ git clone https://github.com/YoubaImkf/minishCapLike
     Escape = Pause
     Enter = Enter
 
+![capture](./readmeAssets/gameCapture.png)
+
 Thanks a lot to RyiSnow for his [Java tuto](httpswww.youtube.complaylistlist=PL_QPQmz5C6WUF-pOQDsbsKbaBZqXj4qSq).
